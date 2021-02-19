@@ -3,7 +3,7 @@ import {GithubContext} from "../context/github/githubContext";
 import {Link} from "react-router-dom";
 
 export const Profile = ({match}) => {
-  const {getUser, getRepos, loading, user, repos} = useContext(GithubContext);
+  const {getUser, getRepos, loading, user} = useContext(GithubContext);
   const urlName = match.params.name;
 
   useEffect(() => {
@@ -23,9 +23,8 @@ export const Profile = ({match}) => {
 
   return (
     <Fragment>
-      <Link to="/" className="btn btn-link">
-        To home
-      </Link>
+      <Link to="/" className="btn btn-link">To home</Link>
+
       <div className="card mb-4">
         <div className="card-body">
           <div className="row">
@@ -36,42 +35,38 @@ export const Profile = ({match}) => {
                 style={{width: '150px'}}
               />
               <h1>{name}</h1>
-              {
-                location && <p>Location: {location}</p>
-              }
+              { location && <p>Location: {location}</p> }
             </div>
-            {
-              bio
-              && <Fragment>
+            <div className="col">
+              { bio && <Fragment>
                 <h3>Bio</h3>
                 <p>{bio}</p>
-              </Fragment>
-            }
-            <a
-              href={html_url}
-              className="btn btn-dark"
-              target="_blank"
-            >
-              Open profile
-            </a>
-            <ul>
-              {
-                login
-                && <li><strong>Username:</strong> {login}</li>
-              }
-              {
-                company
-                && <li><strong>Company:</strong> {company}</li>
-              }
-              {
-                blog
-                && <li><strong>Website:</strong> {blog}</li>
-              }
-            </ul>
-            <div className="badge badge-primary">Followers: {followers}</div>
-            <div className="badge badge-success">Following: {following}</div>
-            <div className="badge badge-info">Repositories: {public_repos}</div>
-            <div className="badge badge-dark">Gists: {public_gists}</div>
+              </Fragment> }
+              <a
+                href={html_url}
+                className="btn btn-dark"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open profile
+              </a>
+              <ul>
+                { login && <li>
+                  <strong>Username:</strong> {login}
+                </li> }
+                { company
+                && <li>
+                  <strong>Company:</strong> {company}
+                </li> }
+                { blog && <li>
+                  <strong>Website:</strong> {blog}
+                </li> }
+              </ul>
+              <div className="badge badge-primary">Followers: {followers}</div>
+              <div className="badge badge-success">Following: {following}</div>
+              <div className="badge badge-info">Repositories: {public_repos}</div>
+              <div className="badge badge-dark">Gists: {public_gists}</div>
+            </div>
           </div>
         </div>
       </div>
